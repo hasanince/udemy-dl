@@ -72,8 +72,13 @@ class Udemy(WebVtt2Srt, ProgressBar):
         sys.stdout.write (fc + sd + "[" + fm + sb + "*" + fc + sd + "] : " + fg + sb + "Course " + fb + sb + "'%s'.\n" % (course_name))
         sys.stdout.write (fc + sd + "[" + fm + sb + "+" + fc + sd + "] : " + fg + sd + "Chapter(s) (%s).\n" % (total_chapters))
         sys.stdout.write (fc + sd + "[" + fm + sb + "*" + fc + sd + "] : " + fg + sd + "Lecture(s) (%s).\n" % (total_lectures))
-        path        = '/content/drive'
-        course_path = "%s/%s" % (path, course_name)
+        if path:
+            if '~' in path:
+                path    = os.path.expanduser(path)
+            course_path    = "%s\\%s" % (path, course_name) if os.name == 'nt' else "%s/%s" % (path, course_name)
+        else:
+            path        = os.getcwd()
+            course_path = "%s\\%s" % (path, course_name) if os.name == 'nt' else "%s/%s" % (path, course_name)
         filepath = '%s.txt' % (course_path)
         if os.path.isfile(filepath):
             with open(filepath, 'w') as f:
