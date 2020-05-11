@@ -140,7 +140,7 @@ class Downloader(object):
         self._active = True
         bytes_to_be_downloaded = 0
         fmode, offset = "wb", 0
-        chunksize, bytesdone, t0 = 100*1024*1024, 0, time.time()
+        chunksize, bytesdone, t0 = 50*1024*1024, 0, time.time()
         headers = {'User-Agent': HEADERS.get('User-Agent')}
         if os.path.exists(temp_filepath):
             offset = os.stat(temp_filepath).st_size
